@@ -1,0 +1,8 @@
+.MuiCardMedia-img {object-fit: contain !important;
+width: 140px !important;
+height: 240px !important;
+}
+
+.MovieCard {
+  display: flex !important;
+}
