@@ -2,7 +2,7 @@ from flask import Flask, request
 from datetime import datetime
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS, cross_origin
-import time
+
 
 app = Flask(__name__)
 # app.config['SECRET_KEY'] = 'secret!'

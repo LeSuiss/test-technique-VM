@@ -7,11 +7,10 @@ import { zone, timeZones, zoneConvertedTime } from './utils/timeZones';
 
 function App() {
   const [timer, setTimer] = useState<string>('')
-  const [alarm, setAlarm] = useState<string>('')
   const [selectedZones, setSelectedZones] = useState<{[key:string]: boolean}>({})
 
-  useEffect(()=> {
-    const socket=io(`http://127.0.0.1:5000`)
+  useEffect(function initializeSocketConnetion() {
+    const socket=io(process.env.REACT_APP_BACKEND_URL??"")
       
     socket.emit('timer', ()=>console.log('requesting timer from server'))
     socket.on("timer", (data: React.SetStateAction<string>) => setTimer(data));
@@ -22,7 +21,7 @@ function App() {
 
   }, []);
   
-  useEffect(()=> {
+  useEffect(function setButtonZone() {
     let result={}
     timeZones
       .filter(zone=>zone.value!==0) 
@@ -34,12 +33,12 @@ function App() {
 
   return (
     <div className="App">
-      
       <div className="header">
         <Alarm timer={timer} />
+      
         {timeZones
         .filter(zone=>zone.value===0)
-        .map(zone=> <Timer timer={timer} zone={zone}/> )}
+        .map(zone=> <Timer key={'main'+zone.label} timer={timer} zone={zone}/> )}
 
         <div className='buttonZoneContainer'>
           <h2>
@@ -47,17 +46,20 @@ function App() {
           </h2>
           {Object.keys(selectedZones).map(zoneName=>
             <button 
-            className={selectedZones[zoneName]? 'selectedButtonZone buttonZone':'buttonZone'}
-            onClick={()=>setSelectedZones(prevZone=>({...prevZone, [zoneName]:!prevZone[zoneName]}))}>{zoneName}
+              key={'button'+zoneName}
+              className={selectedZones[zoneName]? 'selectedButtonZone buttonZone':'buttonZone'}
+              onClick={()=>setSelectedZones(prevZone=>({...prevZone, [zoneName]:!prevZone[zoneName]}))}
+            >
+              {zoneName}
             </button>)}
         </div>
       </div>
 
       <div>
-      {
-      otherZones
-      .filter(zone=>selectedZones[zone.location])
-      .map(zone=> <Timer key={zone.label} timer={timer} zone={zone}/> )}
+        {
+        otherZones
+        .filter(zone=>selectedZones[zone.location])
+        .map(zone=> <Timer key={zone.label} timer={timer} zone={zone}/> )}
       </div>
     </div>
   );

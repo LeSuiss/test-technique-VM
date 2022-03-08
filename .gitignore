@@ -1,4 +1,15 @@
+
+# Frontend
 node_modules
 */.env
 */dist
 ./*.rdb
+
+
+# Backend
+
+lib/
+lib64/
+bin/
+share/
+
