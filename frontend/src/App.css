@@ -1,8 +1,82 @@
-.MuiCardMedia-img {object-fit: contain !important;
-width: 140px !important;
-height: 240px !important;
+
+.App{
+  display: flex;
+  width:100vw;
+  flex-flow: column;
 }
 
-.MovieCard {
-  display: flex !important;
+.App>:nth-child(1){
+  display: flex;
+  justify-content: center;
+}
+.buttonZoneContainer{
+  display: flex;
+  flex-flow: wrap;
+  overflow: scroll;
+  height: 200px;
+  width: 500px;
+}
+.buttonZone{
+color: rgb(90, 90, 190);
+background-color: whitesmoke;
+}
+.selectedButtonZone{
+  background-color: rgb(90, 90, 190);
+  color:white
+}
+.buttonZoneContainer h2{
+  width: 100%;
+  text-align: center;
+}
+.buttonZone{
+  width:auto;
+  height:30px;
+  margin:4px;
+  flex:1
+}
+
+.App>:nth-child(2){
+  display: flex;
+  flex-flow: wrap;
+}
+.card{
+  border:2px double grey;
+  width:300px;
+  margin:20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-evenly;
+  flex-flow: column;
+  padding:10px;
+  background-color:lightgrey
+}
+.card>* {
+  width:100%;
+}
+
+/* title */
+.card>:nth-child(1){
+  font-size: 25px;
+  font-weight: bold;
+}
+/* subtitle */
+
+.card>:nth-child(2){
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.clock{
+  margin-top:10px;
+  color:lightgreen;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:130px;
+  height:40px;
+
 }
