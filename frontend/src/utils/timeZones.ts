@@ -134,8 +134,8 @@ export const timeZones:zone[] = [
   ];
 
 export function zoneConvertedTime(time:string, zone:zone){
-  
-  let hour= parseFloat(time.slice(0,1))
+  const hourIsSingleDigit = time.length === 7
+  let hour= parseFloat(time.slice(0, hourIsSingleDigit? 1:2))
   hour +=zone.value
   if(hour <0) hour +=24
   const remaingTimevalues= time.slice(2,time.length)

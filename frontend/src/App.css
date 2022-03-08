@@ -5,10 +5,44 @@
   flex-flow: column;
 }
 
-.App>:nth-child(1){
+.header{
   display: flex;
-  justify-content: center;
+  width:100vw;
+  border:solid;
+  justify-content: space-around;
+  align-items: center;
 }
+.header>*{
+  height: 100%;
+}
+.Alarm{
+  display: grid;
+  grid-template-areas: 
+  'title title title' 
+  'plusHour dash plusMin' 
+  'valueHour dash valueMin' 
+  'minusHour dash minusMin';
+  gap: 5px;
+  grid-auto-flow: column;
+  width: 200px;
+  justify-content: center;
+ }
+ .Alarm>h2{
+   grid-area: title;
+   text-align: center;
+ }
+ .Alarm span{
+   grid-area:dash;
+   align-self:center
+ }
+  
+  input{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  width:60px
+}
+
 .buttonZoneContainer{
   display: flex;
   flex-flow: wrap;

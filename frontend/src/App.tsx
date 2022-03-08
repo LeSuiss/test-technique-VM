@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import './App.css';
+import Alarm from './components/Alarm';
 import Timer from './components/Timer';
 import { zone, timeZones, zoneConvertedTime } from './utils/timeZones';
 
@@ -34,7 +35,8 @@ function App() {
   return (
     <div className="App">
       
-      <div>
+      <div className="header">
+        <Alarm timer={timer} />
         {timeZones
         .filter(zone=>zone.value===0)
         .map(zone=> <Timer timer={timer} zone={zone}/> )}

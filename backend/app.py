@@ -8,13 +8,13 @@ app = Flask(__name__)
 # app.config['SECRET_KEY'] = 'secret!'
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
-client=[]
+clientsListening=[]
 
 @socketio.on('connect')
 def on_connect(sid):
     print('connection is requested by', request.sid)
-    global client
-    client.append(request.sid)
+    global clientsListening
+    clientsListening.append(request.sid)
     emit('is connected')
 
 
@@ -25,12 +25,12 @@ def givingTimeEverySec():
     emit('timer', current_time )
     print(current_time)
     socketio.sleep(1)
-    if request.sid in client:
-      givingTime()
+    if request.sid in clientsListening:
+      givingTimeEverySec()
 
 @socketio.on('disconnect')
 def closing_connection():
-    client.remove(request.sid)
+    clientsListening.remove(request.sid)
     print('closing connection')
 
 
